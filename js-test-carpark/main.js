@@ -8,7 +8,6 @@ if (carStatus == 'in') {
      localStorage.setItem('deliveryDate', curDate);
      var dialogData = [
           {
-               id: 1,
                str: "Nhập bảng số xe: ",
                r: "", //default response
                validateFn: function (r) {
@@ -33,7 +32,6 @@ if (carStatus == 'in') {
                }
           },
           {
-               id: 2,
                str: "Nhập loại xe: ",
                r: "", //default response
                validateFn: function (r) {
@@ -62,7 +60,7 @@ if (carStatus == 'in') {
                {
                     licensePlate: localStorage.getItem('licensePlate'),
                     carType: localStorage.getItem('carType'),
-                    ngaygui: localStorage.getItem('deliveryDate'),
+                    deliveryDate: localStorage.getItem('deliveryDate'),
                }
           ];
 
@@ -120,7 +118,7 @@ if (carStatus == 'out') {
 function carCost(listData)
 {
      var fee = 5000;
-     const deliveryDate = new Date(listData[0].ngaygui);
+     const deliveryDate = new Date(listData[0].deliveryDate);
      const outDate = new Date('Fri Mar 25 2022 02:23:54 GMT+0700 (Indochina Time)');
      //const outDate = new Date(localStorage.getItem('outDate'));
      const diffInMs = outDate - deliveryDate;
