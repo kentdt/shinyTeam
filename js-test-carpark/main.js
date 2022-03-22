@@ -53,7 +53,7 @@ if (carStatus == 'in') {
      }
      document.write("Bảng số xe: " + localStorage.getItem('licensePlate') + "<br />");
      document.write("Loại xe: " + localStorage.getItem('carType') + "<br />");
-     document.write("Ngày giờ gửi: " + localStorage.getItem('deliveryDate') + "<br />");
+     document.write("Ngày giờ gửi: " + formatDate(localStorage.getItem('deliveryDate')) + "<br />");
 
      listDataInput =
           [
@@ -110,7 +110,7 @@ if (carStatus == 'out') {
      }
      document.write("Bảng số xe: " + localStorage.getItem('licensePlate') + "<br />");
      document.write("Loại xe: " + localStorage.getItem('carType') + "<br />");
-     document.write("Ngày giờ ra: " + localStorage.getItem('outDate') + "<br />");
+     document.write("Ngày giờ ra: " + formatDate(localStorage.getItem('outDate')) + "<br />");
      document.write("Giá tiền: " + localStorage.getItem('carCost') + " vnd <br />");
 }
 
@@ -149,4 +149,20 @@ function promptDialog(data)
           }
      }
      return false;
+}
+
+function formatDate(date) {
+     date = new Date(date);
+     var year = date.getFullYear(),
+        month = date.getMonth() + 1, // months are zero indexed
+        day = date.getDate(),
+        hour = date.getHours(),
+        minute = date.getMinutes(),
+        second = date.getSeconds(),
+        hourFormatted = hour % 12 || 12, // hour returned in 24 hour format
+        minuteFormatted = minute < 10 ? "0" + minute : minute,
+        morning = hour < 12 ? " am" : " pm";
+
+    return  day + "/" + month + "/" + year + " " + hourFormatted + ":" +
+            minuteFormatted + morning;
 }
