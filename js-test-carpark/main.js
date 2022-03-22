@@ -74,6 +74,7 @@ if (carStatus == 'in') {
      }
 
 }
+
 //xe ra
 if (carStatus == 'out') {
      var dialogData =
@@ -114,7 +115,7 @@ if (carStatus == 'out') {
      document.write("Giá tiền: " + localStorage.getItem('carCost') + " vnd <br />");
 }
 
-
+//phi gui xe
 function carCost(listData)
 {
      var fee = 5000;
@@ -130,6 +131,7 @@ function carCost(listData)
      return parseInt(fee);
 }
 
+//loop prompt
 function promptDialog(data)
 {
      var response = data.r;
@@ -151,6 +153,7 @@ function promptDialog(data)
      return false;
 }
 
+//format date
 function formatDate(date) {
      date = new Date(date);
      var year = date.getFullYear(),
