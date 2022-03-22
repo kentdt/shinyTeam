@@ -119,8 +119,8 @@ function carCost(listData)
 {
      var fee = 5000;
      const deliveryDate = new Date(listData[0].deliveryDate);
-     const outDate = new Date('Fri Mar 25 2022 02:23:54 GMT+0700 (Indochina Time)');
-     //const outDate = new Date(localStorage.getItem('outDate'));
+     //const outDate = new Date('Fri Mar 27 2022 02:23:54 GMT+0700 (Indochina Time)');
+     const outDate = new Date(localStorage.getItem('outDate'));
      const diffInMs = outDate - deliveryDate;
      const diffInDays = Math.round(diffInMs / (1000 * 60 * 60 * 24));
      if (diffInDays >= 1) {
