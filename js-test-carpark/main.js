@@ -71,7 +71,7 @@ if (carStatus == 'in') {
      }
      document.write("Bảng số xe: " + localStorage.getItem('licensePlate') + "<br />");
      document.write("Loại xe: " + localStorage.getItem('carType') + "<br />");
-     document.write("Ngày giờ gửi: " + formatDate(localStorage.getItem('deliveryDate')) + "<br />");
+     document.write("Ngày giờ gửi: " + localStorage.getItem('deliveryDate') + "<br />");
 
      listDataOutPut = JSON.parse(localStorage.getItem('listData'));
      writeTable(listDataOutPut);
@@ -203,4 +203,6 @@ function writeTable(data)
             }
      }
      document.getElementById("container").appendChild(table);
+     const elements = document.getElementsByClassName("input_info");
+     while (elements.length > 0) elements[0].remove();
 }
