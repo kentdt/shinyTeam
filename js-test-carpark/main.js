@@ -97,6 +97,8 @@ if (carStatus == 'out') {
                     }, //returns true if successful, otherwise false
                     actionFn: function(r) { //if successful
                          //tinh phi va remove xe
+                         licensePlate = r;
+                         localStorage.setItem('licensePlate', r);
                          var curDate = new Date().getTime();
                          curDate = new Date(curDate);
                          localStorage.setItem('outDate', curDate);
