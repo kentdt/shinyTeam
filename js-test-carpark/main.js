@@ -51,16 +51,13 @@ if (carStatus == 'in') {
      for (var i=0; go && i < dialogData.length; i++) {
           go = promptDialog(dialogData[i], carStatus);
      }
-     document.write("Bảng số xe: " + localStorage.getItem('licensePlate') + "<br />");
-     document.write("Loại xe: " + localStorage.getItem('carType') + "<br />");
-     document.write("Ngày giờ gửi: " + formatDate(localStorage.getItem('deliveryDate')) + "<br />");
 
      listDataInput =
           [
                {
                     licensePlate: localStorage.getItem('licensePlate'),
                     carType: localStorage.getItem('carType'),
-                    deliveryDate: localStorage.getItem('deliveryDate'),
+                    deliveryDate: formatDate(localStorage.getItem('deliveryDate')),
                }
           ];
 
@@ -70,8 +67,14 @@ if (carStatus == 'in') {
           oldListData = JSON.parse(localStorage.getItem('listData'));
           const newlistData  = oldListData.concat(listDataInput);
           localStorage.setItem('listData', JSON.stringify(newlistData));
-          localStorage.setItem('deliveryDate', curDate);
+          localStorage.setItem('deliveryDate', formatDate(curDate));
      }
+     document.write("Bảng số xe: " + localStorage.getItem('licensePlate') + "<br />");
+     document.write("Loại xe: " + localStorage.getItem('carType') + "<br />");
+     document.write("Ngày giờ gửi: " + formatDate(localStorage.getItem('deliveryDate')) + "<br />");
+
+     listDataOutPut = JSON.parse(localStorage.getItem('listData'));
+     writeTable(listDataOutPut);
 
 }
 
@@ -109,10 +112,12 @@ if (carStatus == 'out') {
      for (var i=0; go && i < dialogData.length; i++) {
           go = promptDialog(dialogData[i], carStatus);
      }
-     document.write("Bảng số xe: " + localStorage.getItem('licensePlate') + "<br />");
-     document.write("Loại xe: " + localStorage.getItem('carType') + "<br />");
+     document.write("Bảng số xe ra: " + localStorage.getItem('licensePlate') + "<br />");
+     document.write("Loại xe ra: " + localStorage.getItem('carType') + "<br />");
      document.write("Ngày giờ ra: " + formatDate(localStorage.getItem('outDate')) + "<br />");
      document.write("Giá tiền: " + localStorage.getItem('carCost') + " vnd <br />");
+     listDataOutPut = JSON.parse(localStorage.getItem('listData'));
+     writeTable(listDataOutPut);
 }
 
 //phi gui xe
@@ -168,4 +173,34 @@ function formatDate(date) {
 
     return  day + "/" + month + "/" + year + " " + hourFormatted + ":" +
             minuteFormatted + morning;
+}
+
+function writeTable(data)
+{
+     var col = [];
+        for (var i = 0; i < data.length; i++) {
+            for (var key in data[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+     }
+     var table = document.createElement("table");
+     var tr = table.insertRow(-1);                   // TABLE ROW.
+
+     for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+     }
+      for (var i = 0; i < data.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = data[i][col[j]];
+            }
+     }
+     document.getElementById("container").appendChild(table);
 }
